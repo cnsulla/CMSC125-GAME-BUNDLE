@@ -1,30 +1,19 @@
 package games.quizGame;
 
-import java.awt.Dimension;
-
-import javax.swing.JPanel;
-
 import utility.BoundsHandler;
 import utility.ImageLoader;
-
-import java.awt.event.*;
 import java.awt.image.*;
 import java.awt.*;
 
-public class MenuPanel extends JPanel implements MouseMotionListener, MouseListener{
+public class MenuPanel extends QuizSubpanel{
     private BufferedImage menuImage;
-    private BufferedImage bg;
     private Font font;
-    private String bg_path = "./src/assets/quiz_menu_bg.png";
-    private BoundsHandler boundsHandler;
-    private static final int    FRAME_WIDTH = 800, 
-                                FRAME_HEIGHT = 500,
-                                FRAME_TOP_GAP = 250,
+    private static final int    FRAME_TOP_GAP = 250,
                                 BUTTON_WIDTH = 200,
                                 BUTTON_HEIGHT = 50,
                                 BUTTON_GAP = 5;
     MenuPanel(){
-        setPreferredSize(new Dimension(FRAME_WIDTH,FRAME_HEIGHT));
+        super();
         
         //event handling
         boundsHandler = new BoundsHandler();
@@ -32,14 +21,11 @@ public class MenuPanel extends JPanel implements MouseMotionListener, MouseListe
 
         //init images;
         font = new Font("Lucida Sans Console", Font.BOLD,25);
-        bg = ImageLoader.loadImage(bg_path);
+        bg = ImageLoader.loadImage(BG_PATH);
         menuImage = new BufferedImage(FRAME_WIDTH,FRAME_HEIGHT, BufferedImage.TYPE_INT_ARGB);
         initMenuImage();
-
-        
-        addMouseMotionListener(this);
     }
-    private void setButtonRectangles(){               
+    protected void setButtonRectangles(){               
         for(int i = 0; i < 3; i++){
             int posX = (FRAME_WIDTH - BUTTON_WIDTH)/2;
             int posY = FRAME_TOP_GAP + (BUTTON_HEIGHT + BUTTON_GAP)*i;
@@ -97,46 +83,24 @@ public class MenuPanel extends JPanel implements MouseMotionListener, MouseListe
         drawButtons(-1);
 
     }
-    @Override
-    public void mouseDragged(MouseEvent e) {
-        
-    }
-    @Override
-    public void mouseMoved(MouseEvent e) {
-        int mouseX = e.getX();
-        int mouseY = e.getY();        
-
-        handleHover(mouseX, mouseY);
-    }
-    
-    @Override
-    public void mouseClicked(MouseEvent e) {
-        
-    }
-    @Override
-    public void mousePressed(MouseEvent e) {
-        
-    }
-    @Override
-    public void mouseReleased(MouseEvent e) {
-        
-    }
-    @Override
-    public void mouseEntered(MouseEvent e) {
-        
-    }
-    @Override
-    public void mouseExited(MouseEvent e) {
-        
-    }
-
     //make text glow
-    private void handleHover(int mouseX, int mouseY){
+    protected void handleHover(int mouseX, int mouseY){
         int index = boundsHandler.getRectangleIndex(mouseX, mouseY);
         drawButtons(index);
     }
     //process input
-    private void handleClick(){
-
+    protected void handleClick(int mouseX, int mouseY){
+        int index = boundsHandler.getRectangleIndex(mouseX, mouseY);
+        if(index == 0){
+            //start game
+            QuizGame.setState(2);
+        }
+        else if(index == 1){
+            //how to play
+            QuizGame.setState(4);
+        }
+        else if(index == 2){
+            QuizGame.exitGame();
+        }
     }
 }

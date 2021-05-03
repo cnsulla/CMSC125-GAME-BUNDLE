@@ -1,7 +1,7 @@
 package games;
 
 public abstract class AbstractGame implements Runnable{
-    private boolean running;    
+    protected boolean running;    
     protected boolean isRunning(){
         return running;
     }

@@ -123,16 +123,18 @@ public class GameSelectGUI implements MouseListener{
             button3.setBorder(null);
         }
     }
-    public static void showScreen(){
+    public static void showScreen(){//try to add a loading screen
         if(currGame != null){
             currGame.stop();
             currGame = null;
         }
         if(selectionFrame != null){
+            //showLoading();
             selectionFrame.setVisible(true);
         }
     }
     public static void hideScreen(){
+        //showLoading();
         if(selectionFrame != null){
             selectionFrame.setVisible(false);
         }
