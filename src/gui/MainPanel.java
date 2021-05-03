@@ -1,15 +1,16 @@
 package gui;
 
-import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import java.io.*;
+import utility.ImageLoader;
+
 import java.awt.*;
 import java.awt.image.*;
 
 class MainPanel extends JPanel {
     private BufferedImage bg;
+    private final String bg_path = "src/assets/main_menu_bg.png";
     MainPanel(){
         GridLayout centerLayout = new GridLayout(0,3);
         centerLayout.setHgap(10);
@@ -20,11 +21,7 @@ class MainPanel extends JPanel {
         int leftMargin = 75;
         int rightMargin = 75; 
         setBorder(new EmptyBorder(topMargin, leftMargin, bottomMargin, rightMargin));
-        try {
-            bg = ImageIO.read(new File("src/assets/main_menu_bg.png"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }   
+        bg = ImageLoader.loadImage(bg_path);
     }
     @Override
     public void paint(Graphics g){         

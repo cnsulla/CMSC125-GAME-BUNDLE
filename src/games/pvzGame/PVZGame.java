@@ -1,10 +1,12 @@
 package games.pvzGame;
 
-public class PVZGame implements Runnable{
+import games.AbstractGame;
+
+public class PVZGame extends AbstractGame{
 
     @Override
     public void run() {
-        while(true){
+        while(super.isRunning()){
             System.out.println("pvz");
             try {
                 Thread.sleep(1000);

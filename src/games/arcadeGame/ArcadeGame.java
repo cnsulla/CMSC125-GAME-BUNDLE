@@ -1,10 +1,12 @@
 package games.arcadeGame;
 
-public class ArcadeGame implements Runnable{
+import games.AbstractGame;
+
+public class ArcadeGame extends AbstractGame{
 
     @Override
     public void run() {
-        while(true){
+        while(super.isRunning()){
             System.out.println("arcade");
             try {
                 Thread.sleep(1000);

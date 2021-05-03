@@ -3,6 +3,7 @@ package gui;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
+import games.AbstractGame;
 import games.arcadeGame.ArcadeGame;
 import games.quizGame.QuizGame;
 import games.pvzGame.PVZGame;
@@ -18,10 +19,14 @@ public class GameSelectGUI implements MouseListener{
     private JButton button1;
     private JButton button2;
     private JButton button3;
+
+    
+    private static AbstractGame currGame;
+    private Thread mainThread;
     
     GameSelectGUI(){
         if(selectionFrame != null){
-            GameSelectGUI.showScreen(true);
+            GameSelectGUI.showScreen();
             return;
         }
         selectionFrame = new JFrame("Game Catalog");
@@ -73,9 +78,12 @@ public class GameSelectGUI implements MouseListener{
 
         selectionFrame.add(mainPanel);               
     }
-    void start(Runnable game){
-        Thread t = new Thread(game);
-        t.start();
+    private void start(AbstractGame game){        
+        hideScreen();
+        currGame = game;
+        currGame.start();
+        mainThread = new Thread(currGame);
+        mainThread.start();
     }
     @Override
     public void mouseClicked(MouseEvent e) {
@@ -115,9 +123,18 @@ public class GameSelectGUI implements MouseListener{
             button3.setBorder(null);
         }
     }
-    public static void showScreen(boolean input){
+    public static void showScreen(){
+        if(currGame != null){
+            currGame.stop();
+            currGame = null;
+        }
         if(selectionFrame != null){
-            selectionFrame.setVisible(input);
+            selectionFrame.setVisible(true);
+        }
+    }
+    public static void hideScreen(){
+        if(selectionFrame != null){
+            selectionFrame.setVisible(false);
         }
     }
 }
