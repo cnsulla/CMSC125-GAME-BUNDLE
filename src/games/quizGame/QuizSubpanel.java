@@ -15,6 +15,7 @@ abstract class QuizSubpanel extends JPanel implements MouseMotionListener, Mouse
     
     QuizSubpanel(){
         setPreferredSize(new Dimension(FRAME_WIDTH,FRAME_HEIGHT));
+        boundsHandler = new BoundsHandler();
         addMouseListener(this);
         addMouseMotionListener(this);
     }  

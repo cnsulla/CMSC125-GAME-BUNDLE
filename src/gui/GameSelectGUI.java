@@ -2,7 +2,6 @@ package gui;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
-
 import games.AbstractGame;
 import games.arcadeGame.ArcadeGame;
 import games.quizGame.QuizGame;
@@ -67,7 +66,7 @@ public class GameSelectGUI implements MouseListener{
         });
         button3.setIcon(new ImageIcon("./src/assets/game_button_3.png"));
 
-
+        
         button1.addMouseListener(this);
         button2.addMouseListener(this);
         button3.addMouseListener(this);
@@ -87,12 +86,10 @@ public class GameSelectGUI implements MouseListener{
     }
     @Override
     public void mouseClicked(MouseEvent e) {
-        // TODO Auto-generated method stub
         
     }
     @Override
     public void mousePressed(MouseEvent e) {
-        // TODO Auto-generated method stub
         
     }
     @Override

@@ -1,11 +1,9 @@
 package games.quizGame;
-
-import utility.BoundsHandler;
 import utility.ImageLoader;
 import java.awt.image.*;
 import java.awt.*;
 
-public class MenuPanel extends QuizSubpanel{
+class MenuPanel extends QuizSubpanel{
     private BufferedImage menuImage;
     private Font font;
     private static final int    FRAME_TOP_GAP = 250,
@@ -16,7 +14,6 @@ public class MenuPanel extends QuizSubpanel{
         super();
         
         //event handling
-        boundsHandler = new BoundsHandler();
         setButtonRectangles();
 
         //init images;
@@ -25,7 +22,7 @@ public class MenuPanel extends QuizSubpanel{
         menuImage = new BufferedImage(FRAME_WIDTH,FRAME_HEIGHT, BufferedImage.TYPE_INT_ARGB);
         initMenuImage();
     }
-    protected void setButtonRectangles(){               
+    protected void setButtonRectangles(){     
         for(int i = 0; i < 3; i++){
             int posX = (FRAME_WIDTH - BUTTON_WIDTH)/2;
             int posY = FRAME_TOP_GAP + (BUTTON_HEIGHT + BUTTON_GAP)*i;

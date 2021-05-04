@@ -5,7 +5,7 @@ import java.awt.image.BufferedImage;
 
 import utility.BoundsHandler;
 import utility.ImageLoader;
-public class HelpPanel extends QuizSubpanel{
+class HelpPanel extends QuizSubpanel{
     private BufferedImage helpImage;
     private Font font;
     private String helpImgPath = "./src/assets/quiz_help.png";

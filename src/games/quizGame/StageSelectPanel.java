@@ -1,7 +1,24 @@
 package games.quizGame;
 
-import javax.swing.JPanel;
+class StageSelectPanel extends QuizSubpanel{
+    StageSelectPanel(){
+        super();
+        //event handling
+        setButtonRectangles();
+    }
+    @Override
+    protected void setButtonRectangles() {
+        //for(int i = 0; i < )
+    }
 
-public class StageSelectPanel extends JPanel{
+    @Override
+    protected void handleHover(int mouseX, int mouseY) {
+        
+    }
+
+    @Override
+    protected void handleClick(int mouseX, int mouseY) {
+        
+    }
     
 }
