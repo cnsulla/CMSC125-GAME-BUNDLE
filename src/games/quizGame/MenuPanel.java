@@ -18,9 +18,9 @@ class MenuPanel extends QuizSubpanel{
 
         //init images;
         font = new Font("Lucida Sans Console", Font.BOLD,25);
-        bg = ImageLoader.loadImage(BG_PATH);
-        menuImage = new BufferedImage(FRAME_WIDTH,FRAME_HEIGHT, BufferedImage.TYPE_INT_ARGB);
-        initMenuImage();
+        menuImage = ImageLoader.loadImage(MENU_BG_PATH);
+        //menuImage = new BufferedImage(FRAME_WIDTH,FRAME_HEIGHT, BufferedImage.TYPE_INT_ARGB);
+        drawButtons(-1);
     }
     protected void setButtonRectangles(){     
         for(int i = 0; i < 3; i++){
@@ -37,13 +37,12 @@ class MenuPanel extends QuizSubpanel{
     }
     private void drawButtons(int highlightedIndex){
         Graphics2D g2d = (Graphics2D) menuImage.getGraphics();
-        g2d.drawImage(bg, 0, 0, null);
         g2d.setFont(font);
         FontMetrics metrics = menuImage.getGraphics().getFontMetrics(font);
         int posX = 0, posY = 0;
 
         //if highlighted, set to red
-        g2d.setColor(Color.BLACK);
+        g2d.setColor(Color.WHITE);
         if(highlightedIndex == 0){
             g2d.setColor(Color.RED);
         }
@@ -53,7 +52,7 @@ class MenuPanel extends QuizSubpanel{
         g2d.drawString("START GAME", posX, posY);
         
         //if highlighted, set to red
-        g2d.setColor(Color.BLACK);
+        g2d.setColor(Color.WHITE);
         if(highlightedIndex == 1){
             g2d.setColor(Color.RED);
         }            
@@ -63,7 +62,7 @@ class MenuPanel extends QuizSubpanel{
         g2d.drawString("HOW TO PLAY", posX, posY);
 
         //if highlighted, set to red
-        g2d.setColor(Color.BLACK);
+        g2d.setColor(Color.WHITE);
         if(highlightedIndex == 2){
             g2d.setColor(Color.RED);
         }        
@@ -72,13 +71,6 @@ class MenuPanel extends QuizSubpanel{
         posY += BUTTON_HEIGHT + BUTTON_GAP;
         g2d.drawString("QUIT", posX, posY);
         repaint();
-    }
-    private void initMenuImage(){
-        Graphics2D graphics = (Graphics2D) menuImage.getGraphics();
-        graphics.setFont(font);
-        graphics.drawImage(bg, 0, 0, null);
-        drawButtons(-1);
-
     }
     //make text glow
     protected void handleHover(int mouseX, int mouseY){
@@ -90,6 +82,7 @@ class MenuPanel extends QuizSubpanel{
         int index = boundsHandler.getRectangleIndex(mouseX, mouseY);
         if(index == 0){
             //start game
+            QuizGame.initializeGame();
             QuizGame.setState(2);
         }
         else if(index == 1){

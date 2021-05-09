@@ -2,13 +2,16 @@ package games.quizGame;
 
 import javax.swing.JPanel;
 import java.awt.event.*;
-import java.awt.image.BufferedImage;
 import utility.*;
 import java.awt.*;
 
 abstract class QuizSubpanel extends JPanel implements MouseMotionListener, MouseListener{
-    protected final String BG_PATH = "./src/assets/quiz_menu_bg.png";
-    protected BufferedImage bg = ImageLoader.loadImage(BG_PATH);
+    //image locations
+    protected static final String MENU_BG_PATH = "./src/assets/quiz_menu_bg.png";
+    protected static final String QUIZ_BG_PATH = "./src/assets/quiz_bg.png";
+    protected static final String HELP_IMG_PATH = "./src/assets/quiz_help.png";
+    protected static final String QUESTION_IMG_PATH = "./src/assets/quiz_question.png";
+    
     protected BoundsHandler boundsHandler;
     protected static final int      FRAME_WIDTH = 800, 
                                     FRAME_HEIGHT = 500;

@@ -10,7 +10,14 @@ public class QuizGame extends AbstractGame{
     private static JFrame quizFrame;
     private static JPanel gamePanel;
     private static CardLayout cardLayout;
+    private static QuizModel quizModel;
+    private static MenuPanel menuPanel;
+    private static StageSelectPanel stageSelectPanel;
+    private static QuestionPanel questionPanel;
+    private static HelpPanel helpPanel;
     private static int state;
+    private static int musicVolume;
+    private static int soundVolume;
     public QuizGame(){
         quizFrame = new JFrame("Are you smarter than a college junior?");
         quizFrame.setUndecorated(true);
@@ -23,6 +30,9 @@ public class QuizGame extends AbstractGame{
         quizFrame.pack();
         quizFrame.setLocationRelativeTo(null);
         quizFrame.setVisible(true);
+
+        musicVolume = 50;
+        soundVolume = 50;
         
     }
     private void initComponents(){
@@ -31,10 +41,10 @@ public class QuizGame extends AbstractGame{
         cardLayout = new CardLayout();
         gamePanel.setLayout(cardLayout);
 
-        gamePanel.add(new MenuPanel(), "A");
-        gamePanel.add(new StageSelectPanel(), "B");
-        gamePanel.add(new QuestionPanel(), "C");
-        gamePanel.add(new HelpPanel(), "D");
+        menuPanel = new MenuPanel();
+        helpPanel = new HelpPanel();
+        gamePanel.add(menuPanel, "A");
+        gamePanel.add(helpPanel, "D");
 
         cardLayout.show(gamePanel, "Main Menu");
         quizFrame.add(gamePanel);
@@ -68,9 +78,88 @@ public class QuizGame extends AbstractGame{
             }
         }
     }
+    static void initializeGame(){
+        quizModel = new QuizModel();          
+        if(stageSelectPanel != null){        
+            gamePanel.remove(stageSelectPanel);  
+        }
+        stageSelectPanel = new StageSelectPanel();    
+        gamePanel.add(stageSelectPanel, "B");
+    }
     static void exitGame(){
         quizFrame.dispose();
         GameSelectGUI.showScreen();
     }
-    
+    static String getTopic(int index){
+        return quizModel.getTopic(index);
+    }
+    static String getQuestion(){
+        return quizModel.getQuestion();
+    }
+    static char getAnswer(){
+        return quizModel.getAnswer();
+    }
+    static void setSelectedQuestion(int index) {
+        quizModel.setSelectedQuestion(index);
+        if(questionPanel != null){        
+            gamePanel.remove(questionPanel);  
+        }
+        questionPanel = new QuestionPanel();
+        gamePanel.add(questionPanel, "C");
+        cardLayout.show(gamePanel, "C");
+    }
+    static boolean isOpened(int index){
+        return quizModel.isOpened(index);
+    }
+    static String getChoice(int index){
+        return quizModel.getChoice(index);
+    }
+    static void setMusicVolume(int volume){
+       QuizGame.musicVolume = volume;
+    }
+    static void setSoundVolume(int volume){
+        QuizGame.soundVolume = volume;
+    }
+    static int getMusicVolume(){
+        return musicVolume;
+    }
+    static int getSoundVolume(){
+        return soundVolume;
+    }
+    static int getPoints(){
+        return quizModel.getPoints();
+    }
+    static void setPoints(int points){
+        quizModel.setPoints(points);
+    }
+
+    //for stage select
+    static String getDifficulty(int i){
+        if(i < 3){
+            return"EASY";
+        }
+        else if(i < 6){
+            return "MEDIUM";
+        }
+        else{
+            return "HARD";
+        }
+    }
+
+    //for questionPanel
+    static String getSelectedDifficulty(){
+        int i = quizModel.getSelectedQuestion();
+        if(i < 3){
+            return"EASY";
+        }
+        else if(i < 6){
+            return "MEDIUM";
+        }
+        else{
+            return "HARD";
+        }
+    }
+    static boolean isDone(){
+        return quizModel.done();
+    }
 }

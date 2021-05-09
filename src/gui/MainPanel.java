@@ -74,7 +74,7 @@ class MainPanel extends JPanel implements MouseMotionListener, MouseListener{
             //show about dialog;
             JOptionPane.showMessageDialog(this, "Glendel B. Calvo\n\nAdrian Lorenzo U. Mabansag\n\nMichael Joshua C. Orais\n\nCris Niño N. Sulla", "ABOUT US", JOptionPane.PLAIN_MESSAGE);
         }
-        else{
+        else if (index == 1){
             System.exit(0);
         }
     }
@@ -97,7 +97,7 @@ class MainPanel extends JPanel implements MouseMotionListener, MouseListener{
         g2d.setFont(font);
         FontMetrics metrics = bg.getGraphics().getFontMetrics(font);
 
-        g2d.setColor(Color.BLACK);
+        g2d.setColor(Color.WHITE);
         if(index == 0){
             g2d.setColor(Color.RED);
         }
@@ -105,15 +105,13 @@ class MainPanel extends JPanel implements MouseMotionListener, MouseListener{
         int posY = PANEL_HEIGHT - BUTTON_HEIGHT;
         g2d.drawString("ABOUT", posX, posY);
 
-        g2d.setColor(Color.BLACK);
+        g2d.setColor(Color.WHITE);
         if(index == 1){
             g2d.setColor(Color.RED);
         }
         posX = PANEL_WIDTH - BUTTON_WIDTH/2  - metrics.stringWidth("EXIT")/2; 
         posY = PANEL_HEIGHT;
         g2d.drawString("EXIT", posX, posY);
-
-        g2d.setColor(Color.BLACK);
         repaint();
     }
 

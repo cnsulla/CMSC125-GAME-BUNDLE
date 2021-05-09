@@ -8,7 +8,6 @@ import utility.ImageLoader;
 class HelpPanel extends QuizSubpanel{
     private BufferedImage helpImage;
     private Font font;
-    private String helpImgPath = "./src/assets/quiz_help.png";
     private static final int    BUTTON_WIDTH = 200,
                                 BUTTON_HEIGHT = 50;
     HelpPanel(){
@@ -18,7 +17,7 @@ class HelpPanel extends QuizSubpanel{
 
         font = new Font("Lucida Sans Console", Font.BOLD,25);
         
-        helpImage = ImageLoader.loadImage(helpImgPath);
+        helpImage = ImageLoader.loadImage(HELP_IMG_PATH);
         drawButtons(-1); // no highlights
     }
 
@@ -40,7 +39,7 @@ class HelpPanel extends QuizSubpanel{
             g2d.setColor(Color.RED);
         }
         else{
-            g2d.setColor(Color.BLACK);
+            g2d.setColor(Color.WHITE);
         }
         FontMetrics metrics = helpImage.getGraphics().getFontMetrics(font);
         int posX = FRAME_WIDTH - BUTTON_WIDTH/2  - metrics.stringWidth("Back")/2; 
